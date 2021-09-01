@@ -86,6 +86,7 @@ def sort_dictionary(dictionary: dict) -> dict:
 
 
 def initial_analysis(cipher_text: str, english_frequency: dict, cipher_frequency: dict):
+    k = 0
     frequent_cipher_letter = []
     frequent_english_letter = []
     del cipher_frequencies[' ']
@@ -100,13 +101,15 @@ def initial_analysis(cipher_text: str, english_frequency: dict, cipher_frequency
     
     for i in range(3):
         for j in range(3):
-            console.print(f'{j}. Replacing {frequent_cipher_letter[i]} with {frequent_english_letter[j]} in the Cipher text', style='green')
+            console.print(f'{k}. Replacing {frequent_cipher_letter[i]} with {frequent_english_letter[j]} in the Cipher text', style='green')
             console.print(cipher_text.replace(frequent_cipher_letter[i], frequent_english_letter[j]))
             print()
+            k += 1
 
-        console.print('Which substitution you think is correct?', style='cyan bold')
-        correct_letter = input() # TODO: choice forms key
-        print()
+
+    console.print('Which substitution you think is correct?', style='cyan bold')
+    
+    return input() # TODO: choice forms key
 
 
 if __name__ == '__main__':
@@ -119,4 +122,5 @@ if __name__ == '__main__':
     """
     cipher_text = read_cipher_alphabet('./monoalphabetic-substitution-cipher/cipher_text')
     cipher_frequencies = calculate_frequencies(cipher_text)
-    initial_analysis(cipher_text, building_english_dict(), cipher_frequencies)
+    choice = initial_analysis(cipher_text, building_english_dict(), cipher_frequencies)
+    print(choice)
